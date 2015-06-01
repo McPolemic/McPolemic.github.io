@@ -1,18 +1,20 @@
 ---
+layout: post
 title: Budgeting in an Ideal World
 date: 2015-05-31
-#published: false
+published: false
 ---
-# Budgeting in an Ideal World
-
 Last night, during a walk, I had a bit of a Twitter storm.
 
-<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">I'm pondering improving budgeting software. <a href="https://twitter.com/simple">@simple</a> is near idea, but doesn't support spouses or shared incomes.</p>&mdash; Adam Lukens (@spawn968) <a href="https://twitter.com/spawn968/status/604877774617231360">May 31, 2015</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">I currently use <a href="https://twitter.com/ynab">@ynab</a>, but it's not very intelligent and very manual (intentionally, to be fair).</p>&mdash; Adam Lukens (@spawn968) <a href="https://twitter.com/spawn968/status/604878101525299200">May 31, 2015</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">I want a system that knows my bills, knows my goals, and knows my income. Tell me what I can spend today. Pay my bills when they're due.</p>&mdash; Adam Lukens (@spawn968) <a href="https://twitter.com/spawn968/status/604878508465061888">May 31, 2015</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Start siphoning money from my immediate awareness and save for rainy days. Get me a month ahead. Six months ahead, even.</p>&mdash; Adam Lukens (@spawn968) <a href="https://twitter.com/spawn968/status/604878767971004416">May 31, 2015</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Finally, let me easily see how I'm doing. Don't make me load an app every time I want to make a purchase.</p>&mdash; Adam Lukens (@spawn968) <a href="https://twitter.com/spawn968/status/604879048217636865">May 31, 2015</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">I'll file this all away under "Businesses that would be great but unsustainable without being creepy".</p>&mdash; Adam Lukens (@spawn968) <a href="https://twitter.com/spawn968/status/604879335632289793">May 31, 2015</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote>
+  <p>I'm pondering improving budgeting software. <a href="https://twitter.com/simple">@simple</a> is near idea, but doesn't support spouses or shared incomes.</p>
+  <p>I currently use <a href="https://twitter.com/ynab">@ynab</a>, but it's not very intelligent and very manual (intentionally, to be fair).</p>
+  <p>I want a system that knows my bills, knows my goals, and knows my income. Tell me what I can spend today. Pay my bills when they're due.</p>
+  <p>Start siphoning money from my immediate awareness and save for rainy days. Get me a month ahead. Six months ahead, even.</p>
+  <p>Finally, let me easily see how I'm doing. Don't make me load an app every time I want to make a purchase.</p>
+  <p>I'll file this all away under "Businesses that would be great but unsustainable without being creepy".</p>
+</blockquote>
+<p>&mdash; Adam Lukens (<a href="https://twitter.com/spawn968">@spawn968</a>) <a href="https://twitter.com/spawn968/status/604879335632289793">May 31, 2015</a></p>
 
 There's a lot to unpack here, honestly, so let's break it down.
 
@@ -55,7 +57,7 @@ I also understand the inherent difficulties in this problem. I suspect YNAB endo
 
 I'd like transactions to be pulled down in near-realtime. Transactions are tagged with a budget category if the payee has been seen before. The money immediately comes out of the budget category and updates the remaining amount.
 
-You never set an amount in a budget category. You set priorities for your money.
+You never set an arbitrary amount in a budget category. You set priorities for your money.
 
 > "I need enough money to feed my family."
 
@@ -63,7 +65,7 @@ On a priority of 0-100, this is 100. Phone bills can wait. Eating out can wait. 
 
 > "Here are all my utility bills. I need to pay them on time."
 
-Let's say this has a priority of 99. The family is fed, so now bills must be paid. Bills are input into the system either manually or with URLs, usernames, and password. Bill amounts are pulled regularly to get new bills and ensure that payments were reached on time. The budget is updated with the amounts that have to be paid plus any overhead (if the bill increases like gas or electricity). A payment is sent via the cheapest means, be it the website through their payment services or a bank's online billpay. The amount is pulled out of the available balance as soon as there is enough to cover it to ensure bills get paid.
+Let's say this has a priority of 99. The family is fed, so now bills must be paid. Bills are input into the system either manually (including normal balance and schedule) or with URLs, usernames, and password. Bill amounts are pulled regularly to get new bills and ensure that payments were reached on time. The budget is updated with the amounts that have to be paid plus any overhead (if the bill increases like gas or electricity). A payment is sent via the cheapest means, be it the website through their payment services or a bank's online billpay. The amount is pulled out of the available balance as soon as there is enough to cover it to ensure bills get paid.
 
 > "I need to buy birthday gifts for the following ten people this year."
 
@@ -73,7 +75,29 @@ Priority? 50. It will be embarassing to miss a gift, but understandable if your 
 
 This is a priority 25 and has no end date. We'll be skimming the remainder of funds gradually to get this as soon as safely possible. Worse comes to worse, this will be reallocated to pay for higher priority items. At all times, the budget can tell you when it expects you'll have the money, adjusting if it needs to move funds or finds more money.
 
-I really like Simple's "Safe to Spend" concept. It tells you what's in your account that isn't earmarked for a future cause. As much as I like having every dollar have a job, I honestly don't think it's worth the overhead. I want to make sure that my priorities are met and that I'm saving for a rainy day. Most YNABbers that I've talked to have a "catch all" savings category, be it "Rainy Day", "Spending Money", etc. This money doesn't have a job because I don't know when I'll take another vacation, need to go to a funeral
+As much as I like YNAB's rule that [every dollar has a job](https://www.youneedabudget.com/method/rule-one), I honestly don't think it's worth the overhead. I want to make sure that my priorities are met and that I'm saving for a rainy day. Most YNABers that I've talked to have a "catch all" savings category, be it "Rainy Day", "Spending Money", etc. This money doesn't have a job because I don't know when I'll take another vacation, need to go to a funeral, or need to loan money. Patterns can emerge if you give a couple of years of properly-tagged transaction history, but there will still be bumps in the road. I really like Simple's "Safe to Spend" concept. It tells you what's in your account that isn't earmarked for a future cause. So long a priorities are loaded, we're safe to spend the rest.
+
+That doesn't mean you should spend all of it, but my suspicion is that people using budgeting software won't. Seeing your balance hit zero is traumatic for people who have clawed their way out of debt. In the mean time, it gives the software useful information on what *is* important to the user. This helps set up new categories, set balances for them, and set priorities. The system can learn simply by you voting on priorities with your remaining funds. You'd have the option of adjusting these fields if you're hoping to make a behavioral change ("I want to eat out less and cook more"), but you don't have to. More importantly, since you can say what's more important, you don't need to say *how* it's important by giving it a dollar amount.
+
+The budget should try to inject intelligence in all things. If I'm near a restaurant where I've historically overspent, send me an alert reminding me to take it easy. Suggest alternate places nearby that I frequent and spend less on average. Send me weekly or monthly reports on how I could save money by frequenting a different grocery store. Let me scan in my receipts and let the budget track the average price of specific products and general goods between stores. Look them up on Amazon and find cheaper deals. Check my credit card's points site for bonus point offers when I step in an Apple Store. 
+
+The budget should lie to you. Ever found money in your pocket you didn't know about? It feels *fantastic*. Possibilities open up. I'm using budget software because I can't trust myself to manage money intelligently on my own. I want to make sure my priorities are taken care of and that I have some walking-around money, but I also want to be saving in a way that doesn't readily show me that I have money available. Take 1-20% (depending on income available after mandatory priorities, prior spending during the year, and any other factor you can think of) and just hide it. Use it to pad out the bumps in the first year of spending before we have a rough idea of how a person acts. Use it to help boost the vacations and low priority items. Prompt me when it hits four figures and suggest I send some to an investment account or CD.
+
+In fact, since we have some access to my various banks, intelligently move money between accounts to ensure that I have money to spend while simultaneously maximizing the interest returns I could be making. Keep the majority of money in Savings, Money Market, etc until it's needed for the month and simply transfer the needed amount. Work to increase my available funds at all times while not impinging on my day-to-day practices. Pay off credit cards weekly. Pay bills at the last possible second to wring out more interest. If I can pay for everything on my credit card instead of my debit card, I actually need a fairly low amount of emergency cash in a checking account. The rest can go to accounts with higher interest yields and varying levels of liquidity in order to maximize income. 
+
+[TextExpander]() has a great dialog showing how many keystrokes you've saved using that product. Show me how much money I've earned using the budget software. 
+
+Image of text expander
+
+Finally, keep me updated on how I'm doing. Offer to send me daily, weekly, or monthly reports. Have a Today widget for iOS and a lock screen widget for Android. Have an Apple Watch glance. Give me an API to pull back basic stats on each priority, category, balance. I can make decisions better if I'm informed, but I'll likely stay ignorant if I have to open an app every time I want to buy lunch. This is another repetitive action that a computer could do for me. 
+
+# Reality
+
+It's hard. Possibly impossible
+
+I can make it for me. Perhaps I should. But it won't help more people. And it really could.
+
+My budget still isn't done. 
 
 
 
@@ -84,3 +108,10 @@ Start siphoning money from my immediate awareness and save for rainy days. Get m
 Finally, let me easily see how I'm doing. Don't make me load an app every time I want to make a purchase.
 I'll file this all away under "Businesses that would be great but unsustainable without being creepy".
 
+
+<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">I'm pondering improving budgeting software. <a href="https://twitter.com/simple">@simple</a> is near idea, but doesn't support spouses or shared incomes.</p>&mdash; Adam Lukens (@spawn968) <a href="https://twitter.com/spawn968/status/604877774617231360">May 31, 2015</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">I currently use <a href="https://twitter.com/ynab">@ynab</a>, but it's not very intelligent and very manual (intentionally, to be fair).</p>&mdash; Adam Lukens (@spawn968) <a href="https://twitter.com/spawn968/status/604878101525299200">May 31, 2015</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">I want a system that knows my bills, knows my goals, and knows my income. Tell me what I can spend today. Pay my bills when they're due.</p>&mdash; Adam Lukens (@spawn968) <a href="https://twitter.com/spawn968/status/604878508465061888">May 31, 2015</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Start siphoning money from my immediate awareness and save for rainy days. Get me a month ahead. Six months ahead, even.</p>&mdash; Adam Lukens (@spawn968) <a href="https://twitter.com/spawn968/status/604878767971004416">May 31, 2015</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Finally, let me easily see how I'm doing. Don't make me load an app every time I want to make a purchase.</p>&mdash; Adam Lukens (@spawn968) <a href="https://twitter.com/spawn968/status/604879048217636865">May 31, 2015</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">I'll file this all away under "Businesses that would be great but unsustainable without being creepy".</p>&mdash; Adam Lukens (@spawn968) <a href="https://twitter.com/spawn968/status/604879335632289793">May 31, 2015</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
