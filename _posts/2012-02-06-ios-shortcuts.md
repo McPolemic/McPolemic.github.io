@@ -1,4 +1,5 @@
 ---
+layout: post
 title: iOS Shortcuts (and their idiosyncracies)
 date: 2012-2-6
 ---

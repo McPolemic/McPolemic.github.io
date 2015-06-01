@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Single Machine Puppet
 date: 2013-05-19
 draft: True

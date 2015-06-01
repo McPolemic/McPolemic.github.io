@@ -1,4 +1,5 @@
 ---
+layout: post
 title: XML and the Database
 date: 2012-12-29
 ---

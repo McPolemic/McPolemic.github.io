@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Home Automation with Redis Pub/Sub
 date: 2015-01-04
 ---

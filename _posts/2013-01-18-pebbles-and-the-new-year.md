@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Pebbles and The New Year
 date: 2013-1-18
 ---

@@ -1,4 +1,5 @@
 ---
+layout: post
 title: The Artist and The Accountant
 date: 2013-03-20
 ---

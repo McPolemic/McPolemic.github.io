@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Five Reasons for iOS
 date: 2012-01-18
 ---

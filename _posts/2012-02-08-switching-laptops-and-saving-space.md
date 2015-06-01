@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Switching laptops and saving space
 date: 2012-2-8
 ---

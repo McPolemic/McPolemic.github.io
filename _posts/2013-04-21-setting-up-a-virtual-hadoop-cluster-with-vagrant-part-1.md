@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "Setting Up a Virtual Hadoop Cluster with Vagrant: Part 1"
 date: 2013-04-21
 ---

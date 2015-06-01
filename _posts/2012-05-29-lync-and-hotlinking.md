@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Lync and Hot-linking
 date: 2012-5-29
 ---

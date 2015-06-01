@@ -1,4 +1,5 @@
 ---
+layout: post
 date: 2012-1-11
 title: The Switch to Android
 ---

@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Refactoring for Readability and Extensibility
 date: 2013-2-28
 published: false

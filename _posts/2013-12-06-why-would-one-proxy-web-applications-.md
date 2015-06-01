@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Why Would One Proxy Web Applications?
 date: 2013-12-05
 ---

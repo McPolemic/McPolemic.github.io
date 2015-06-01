@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Pebbles and File Folders
 date: 2013-01-22
 ---

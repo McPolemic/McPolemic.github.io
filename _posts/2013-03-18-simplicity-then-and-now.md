@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Simplicity, Then and Now
 date: 2013-03-18
 ---
