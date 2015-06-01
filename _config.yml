@@ -1,0 +1,12 @@
+# Site settings
+title: I Want to be Wrong
+email: spawn968@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+  Random musings on software and life.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://McPolemic.github.io" # the base hostname & protocol for your site
+twitter_username: spawn968
+github_username:  McPolemic
+
+# Build settings
+markdown: kramdown
