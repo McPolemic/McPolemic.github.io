@@ -1,9 +1,8 @@
-Title: A Tale of Two Routers  
-Author: Adam Lukens   
-Date: 2015-08-30  
-Tags:   
-Category:   
-slug: 2015-08-30-a-tale-of-two-routers
+---
+layout: post
+title: A Tale of Two Routers  
+date: 2015-08-30  
+---
 
 For about two years, I've run two routers. I acknowledge that's weird. Let me explain.
 
