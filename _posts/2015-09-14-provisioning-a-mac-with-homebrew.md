@@ -10,18 +10,14 @@ Luckily, it seems [Thoughtbot](thoughtbot) already had that thought and solved i
 
 First, install `brew bundle`:
 
-```
-brew tap homebrew/bundle && brew bundle
-```
+`brew tap homebrew/bundle && brew bundle`
 
 You write out the packages you'd like installed in a Gemfile-esque syntax, like so:
 
-```
-brew "ack"
-brew "ansible"
-brew "brew-cask"
-brew "docker"
-```
+    brew "ack"  
+    brew "ansible"  
+    brew "brew-cask"
+    brew "docker"
 
 Save that in a file named `Brewfile` and run `brew bundle` to watch everything you'd like installed be set up. I haven't found much that I want that isn't either handled by the Mac App Store or Homebrew, and I [have a decent amount installed](my_brewfile).
 
