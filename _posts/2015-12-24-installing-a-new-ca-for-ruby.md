@@ -15,7 +15,7 @@ This morning, tragedy struck:
 [3] pry(main)> client.issues
 Faraday::SSLError: SSL_connect returned=1 errno=0 state=error: certificate verify failed
 from /Users/adam/.rbenv/versions/2.2.3/lib/ruby/2.2.0/net/http.rb:923:in `connect'
-[4] pry(main)>
+[4] pry(main)
 </pre>
 
 During the course of work, I realized that I had yet to install our internal Certificate Authority on my laptop in a place that Ruby could find.
