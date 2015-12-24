@@ -6,7 +6,7 @@ title: Installing a Certificate Authority for Ruby
 
 This morning, tragedy struck:
 
-```
+```shell
 ➜  dev_dashboard git:(master) ✗ pry
 [1] pry(main)> require './lib/internal'
 => true
@@ -24,14 +24,14 @@ It took a bit of detective work to track down the right answer, so hopefully wri
 
 First, we need to find out where OpenSSL is looking for certificates.
 
-```
+```shell
 $ ruby -ropenssl -e 'puts OpenSSL::X509::DEFAULT_CERT_FILE'
 /usr/local/etc/openssl/cert.pem
 ```
 
 Then, we can install the CA certs.
 
-```
+```shell
 ➜  dev_dashboard git:(master) ✗ cat ~/Desktop/root_certs/*.pem >> /usr/local/etc/openssl/cert.pem
 ➜  dev_dashboard git:(master) ✗ pry
 [1] pry(main)> require './lib/internal'
