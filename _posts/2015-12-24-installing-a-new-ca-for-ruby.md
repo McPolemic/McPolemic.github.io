@@ -6,7 +6,7 @@ title: Installing a Certificate Authority for Ruby
 
 This morning, tragedy struck:
 
-```shell
+<pre>
 ➜  dev_dashboard git:(master) ✗ pry
 [1] pry(main)> require './lib/internal'
 => true
@@ -16,7 +16,7 @@ This morning, tragedy struck:
 Faraday::SSLError: SSL_connect returned=1 errno=0 state=error: certificate verify failed
 from /Users/adam/.rbenv/versions/2.2.3/lib/ruby/2.2.0/net/http.rb:923:in `connect'
 [4] pry(main)>
-```
+</pre>
 
 During the course of work, I realized that I had yet to install our internal Certificate Authority on my laptop in a place that Ruby could find.
 Ruby uses OpenSSL to verify the various certificates it comes across, and thanks to Homebrew and various other tools, I have a couple of OpenSSL installs on my machine.
@@ -24,14 +24,14 @@ It took a bit of detective work to track down the right answer, so hopefully wri
 
 First, we need to find out where OpenSSL is looking for certificates.
 
-```shell
+<pre>
 $ ruby -ropenssl -e 'puts OpenSSL::X509::DEFAULT_CERT_FILE'
 /usr/local/etc/openssl/cert.pem
-```
+</pre>
 
 Then, we can install the CA certs.
 
-```shell
+<pre>
 ➜  dev_dashboard git:(master) ✗ cat ~/Desktop/root_certs/*.pem >> /usr/local/etc/openssl/cert.pem
 ➜  dev_dashboard git:(master) ✗ pry
 [1] pry(main)> require './lib/internal'
@@ -41,6 +41,6 @@ Then, we can install the CA certs.
 [3] pry(main)> client.issues
 => [{:url=>"https://git.company.com/api/v3/repos/Company/Project/issues/44",
 ...
-```
+</pre>
 
 Success!
