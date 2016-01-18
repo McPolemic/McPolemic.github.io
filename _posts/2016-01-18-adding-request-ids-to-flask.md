@@ -12,22 +12,20 @@ We build up larger programs using these small and stable building blocks. If som
 
 Imagine you want to have a way of reporting a credit card stolen. The request chain may look something like this:
 
-```
-# Send card details
-POST /cards/lost_and_stolen/
+    # Send card details
+    POST /cards/lost_and_stolen/
 
-    # First, look up the card details
-    GET /cards/1234567890123456/
+        # First, look up the card details
+        GET /cards/1234567890123456/
 
-    # Look up the owning account to ensure it's still open
-    GET /accounts/123456/
+        # Look up the owning account to ensure it's still open
+        GET /accounts/123456/
 
-    # Close the card
-    DELETE /cards/1234567890123456/
+        # Close the card
+        DELETE /cards/1234567890123456/
 
-    # Finally, order a new card for the member
-    POST /accounts/123456/card/
-```
+        # Finally, order a new card for the member
+        POST /accounts/123456/card/
 
 When laid out like that, the five requests a relatively easy to follow. Unfortunately, we have 30-50 requests per second and are growing that number on a monthly basis. When something happens in the middle of that chain, it can be hard to debug exactly what went wrong. That's why we added request IDs.
 
@@ -39,23 +37,19 @@ A request ID is a unique identifier for each request. We decided that we wanted 
 
 This allows the following request chain (which could have any number of requests in between them) go from this:
 
-```
-POST /cards/lost_and_stolen/
-GET /cards/1234567890123456/
-GET /accounts/123456/
-DELETE /cards/1234567890123456/
-POST /accounts/123456/card/
-```
+    POST /cards/lost_and_stolen/
+    GET /cards/1234567890123456/
+    GET /accounts/123456/
+    DELETE /cards/1234567890123456/
+    POST /accounts/123456/card/
 
 To this:
 
-```
-0dadb33f-ee15-470a-bfc8-5e35926793a5 POST /cards/lost_and_stolen/
-0dadb33f-ee15-470a-bfc8-5e35926793a5,ac0eabbd-122f-491c-aacf-670d255eef3d GET /cards/1234567890123456/
-0dadb33f-ee15-470a-bfc8-5e35926793a5,f2aab75e-719f-4a00-8d81-a1266cfb6a81 GET /accounts/123456/
-0dadb33f-ee15-470a-bfc8-5e35926793a5,639832bf-111c-40ac-abed-bf93ae15c54d DELETE /cards/1234567890123456/
-0dadb33f-ee15-470a-bfc8-5e35926793a5,68493175-8a39-421b-99e9-53e937fa5d12 POST /accounts/123456/card/
-```
+    0dadb33f-ee15-470a-bfc8-5e35926793a5 POST /cards/lost_and_stolen/
+    0dadb33f-ee15-470a-bfc8-5e35926793a5,ac0eabbd-122f-491c-aacf-670d255eef3d GET /cards/1234567890123456/
+    0dadb33f-ee15-470a-bfc8-5e35926793a5,f2aab75e-719f-4a00-8d81-a1266cfb6a81 GET /accounts/123456/
+    0dadb33f-ee15-470a-bfc8-5e35926793a5,639832bf-111c-40ac-abed-bf93ae15c54d DELETE /cards/1234567890123456/
+    0dadb33f-ee15-470a-bfc8-5e35926793a5,68493175-8a39-421b-99e9-53e937fa5d12 POST /accounts/123456/card/
 
 This also helps with scheduled jobs which may be scheduled days or weeks in the future. These request IDs are logged and read into [Logstash](logstash) where we can then view the lifecycle of any request that comes into our system. Applications that send requests are able to submit their own request IDs such that we can track requests that start in application A, go to our REST server, and respond back, and can track the entire interaction using [Kibana](kibana).
 
