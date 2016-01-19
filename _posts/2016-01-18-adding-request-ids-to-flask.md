@@ -51,11 +51,11 @@ To this:
     0dadb33f-ee15-470a-bfc8-5e35926793a5,639832bf-111c-40ac-abed-bf93ae15c54d DELETE /cards/1234567890123456/
     0dadb33f-ee15-470a-bfc8-5e35926793a5,68493175-8a39-421b-99e9-53e937fa5d12 POST /accounts/123456/card/
 
-This also helps with scheduled jobs which may be scheduled days or weeks in the future. These request IDs are logged and read into [Logstash](logstash) where we can then view the lifecycle of any request that comes into our system. Applications that send requests are able to submit their own request IDs such that we can track requests that start in application A, go to our REST server, and respond back, and can track the entire interaction using [Kibana](kibana).
+This also helps with scheduled jobs which may be scheduled days or weeks in the future. These request IDs are logged and read into [Logstash][logstash] where we can then view the lifecycle of any request that comes into our system. Applications that send requests are able to submit their own request IDs such that we can track requests that start in application A, go to our REST server, and respond back, and can track the entire interaction using [Kibana][kibana].
 
 # Implementation
 
-Our REST server is implemented in [Flask](flask). Here's how we implemented this. First, we set up all of the heavy lifting in `utils.py`. 
+Our REST server is implemented in [Flask][flask]. Here's how we implemented this. First, we set up all of the heavy lifting in `utils.py`. 
 
     # utils.py
     import uuid
@@ -166,6 +166,6 @@ Finally, we can send some requests and see that the logging and request IDs are 
 
 Here we see a request sent with no header running with a generated request ID and one passed in with "my_header" that has a new one appended to the end. 
 
-(logstash): https://www.elastic.co/products/logstash
-(kibana): https://www.elastic.co/products/kibana
-(flask): http://flask.pocoo.org/
+[logstash]: https://www.elastic.co/products/logstash
+[kibana]: https://www.elastic.co/products/kibana
+[flask]: http://flask.pocoo.org/
