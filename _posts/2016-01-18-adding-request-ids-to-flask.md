@@ -57,118 +57,112 @@ This also helps with scheduled jobs which may be scheduled days or weeks in the 
 
 Our REST server is implemented in [Flask](flask). Here's how we implemented this. First, we set up all of the heavy lifting in `utils.py`. 
 
-```
-# utils.py
-import uuid
-import logging
-import flask
-
-# Generate a new request ID, optionally including an original request ID
-def generate_request_id(original_id=''):
-    new_id = uuid.uuid4()
-
-    if original_id:
-        new_id = "{},{}".format(original_id, new_id)
-
-    return new_id
-
-# Returns the current request ID or a new one if there is none
-# In order of preference:
-#   * If we've already created a request ID and stored it in the flask.g context local, use that
-#   * If a client has passed in the X-Request-Id header, create a new ID with that prepended
-#   * Otherwise, generate a request ID and store it in flask.g.request_id
-def request_id():
-    if getattr(flask.g, 'request_id', None):
-        return flask.g.request_id
-
-    headers = flask.request.headers
-    original_request_id = headers.get("X-Request-Id")
-    new_uuid = generate_request_id(original_request_id)
-    flask.g.request_id = new_uuid
-
-    return new_uuid
-
-class RequestIdFilter(logging.Filter):
-    # This is a logging filter that makes the request ID available for use in
-    # the logging format. Note that we're checking if we're in a request
-    # context, as we may want to log things before Flask is fully loaded.
-    def filter(self, record):
-        record.request_id = request_id() if flask.has_request_context() else ''
-        return True
-```
+    # utils.py
+    import uuid
+    import logging
+    import flask
+    
+    # Generate a new request ID, optionally including an original request ID
+    def generate_request_id(original_id=''):
+        new_id = uuid.uuid4()
+    
+        if original_id:
+            new_id = "{},{}".format(original_id, new_id)
+    
+        return new_id
+    
+    # Returns the current request ID or a new one if there is none
+    # In order of preference:
+    #   * If we've already created a request ID and stored it in the flask.g context local, use that
+    #   * If a client has passed in the X-Request-Id header, create a new ID with that prepended
+    #   * Otherwise, generate a request ID and store it in flask.g.request_id
+    def request_id():
+        if getattr(flask.g, 'request_id', None):
+            return flask.g.request_id
+    
+        headers = flask.request.headers
+        original_request_id = headers.get("X-Request-Id")
+        new_uuid = generate_request_id(original_request_id)
+        flask.g.request_id = new_uuid
+    
+        return new_uuid
+    
+    class RequestIdFilter(logging.Filter):
+        # This is a logging filter that makes the request ID available for use in
+        # the logging format. Note that we're checking if we're in a request
+        # context, as we may want to log things before Flask is fully loaded.
+        def filter(self, record):
+            record.request_id = request_id() if flask.has_request_context() else ''
+            return True
 
 Next, we'll set up our logging format. 
 
-```
-# log.py
-import logging.config
-
-LOG_CONFIG = {
-    'version': 1,
-    'filters': {
-        'request_id': {
-            '()': 'utils.RequestIdFilter',
+    # log.py
+    import logging.config
+    
+    LOG_CONFIG = {
+        'version': 1,
+        'filters': {
+            'request_id': {
+                '()': 'utils.RequestIdFilter',
+            },
         },
-    },
-    'formatters': {
-        'standard': {
-            'format': '%(asctime)s - %(name)s.%(module)s.%(funcName)s:%(lineno)d - %(levelname)s - %(request_id)s - %(message)s',
+        'formatters': {
+            'standard': {
+                'format': '%(asctime)s - %(name)s.%(module)s.%(funcName)s:%(lineno)d - %(levelname)s - %(request_id)s - %(message)s',
+            },
         },
-    },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'level': 'DEBUG',
-            'filters': ['request_id'],
-            'formatter': 'standard'
+        'handlers': {
+            'console': {
+                'class': 'logging.StreamHandler',
+                'level': 'DEBUG',
+                'filters': ['request_id'],
+                'formatter': 'standard'
+            }
+        },
+        'loggers': {
+            '': {
+                'handlers': ['console'],
+                'level':'DEBUG',
+            },
+            'app': {
+                'handlers': ['console'],
+                'level':'DEBUG',
+            },
         }
-    },
-    'loggers': {
-        '': {
-            'handlers': ['console'],
-            'level':'DEBUG',
-        },
-        'app': {
-            'handlers': ['console'],
-            'level':'DEBUG',
-        },
     }
-}
-
-logging.config.dictConfig(LOG_CONFIG)
-```
+    
+    logging.config.dictConfig(LOG_CONFIG)
 
 Next, we'll set up a small Flask app to show it in action. 
-```
-# server.py
-import logging
-import utils
-import log
-from flask import Flask
 
-logger = logging.getLogger(__name__)
-app = Flask(__name__)
-
-@app.route("/")
-def hello():
-    logger.info("Sending our hello")
-    return "Hello World!"
-
-if __name__ == "__main__":
-    app.run()
-```
+    # server.py
+    import logging
+    import utils
+    import log
+    from flask import Flask
+    
+    logger = logging.getLogger(__name__)
+    app = Flask(__name__)
+    
+    @app.route("/")
+    def hello():
+        logger.info("Sending our hello")
+        return "Hello World!"
+    
+    if __name__ == "__main__":
+        app.run()
 
 Finally, we can send some requests and see that the logging and request IDs are working. 
 
-```
-adam@puck:~/tmp$ source venv/bin/activate
-(venv)adam@puck:~/tmp$ python server.py 
-2016-01-18 02:40:19,258 - werkzeug._internal._log:87 - INFO -  -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2016-01-18 02:40:42,543 - __main__.server.hello:11 - INFO - 266e188c-f8d8-48bd-a285-eabc4f0a598f - Sending our hello
-2016-01-18 02:40:42,543 - werkzeug._internal._log:87 - INFO -  - 127.0.0.1 - - [18/Jan/2016 02:40:42] "GET / HTTP/1.1" 200 -
-2016-01-18 02:42:51,959 - __main__.server.hello:11 - INFO - my_header,8a535551-7c1d-48fe-bc64-1d18431fc9ef - Sending our hello
-2016-01-18 02:42:51,960 - werkzeug._internal._log:87 - INFO -  - 127.0.0.1 - - [18/Jan/2016 02:42:51] "GET / HTTP/1.1" 200 -
-```
+    adam@puck:~/tmp$ source venv/bin/activate
+    (venv)adam@puck:~/tmp$ python server.py 
+    2016-01-18 02:40:19,258 - werkzeug._internal._log:87 - INFO -  -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+    2016-01-18 02:40:42,543 - __main__.server.hello:11 - INFO - 266e188c-f8d8-48bd-a285-eabc4f0a598f - Sending our hello
+    2016-01-18 02:40:42,543 - werkzeug._internal._log:87 - INFO -  - 127.0.0.1 - - [18/Jan/2016 02:40:42] "GET / HTTP/1.1" 200 -
+    2016-01-18 02:42:51,959 - __main__.server.hello:11 - INFO - my_header,8a535551-7c1d-48fe-bc64-1d18431fc9ef - Sending our hello
+    2016-01-18 02:42:51,960 - werkzeug._internal._log:87 - INFO -  - 127.0.0.1 - - [18/Jan/2016 02:42:51] "GET / HTTP/1.1" 200 -
+
 
 Here we see a request sent with no header running with a generated request ID and one passed in with "my_header" that has a new one appended to the end. 
 
