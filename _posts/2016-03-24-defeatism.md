@@ -18,9 +18,9 @@ About three years ago, I moved to a new job where I had to define my own develop
 
 All in all, I'd say it's worked. I've grown leaps and bounds over where I was at my first job. I've started to push back on "that's just the way it's always been". I think the team I'm on is doing great work and I see milestone improvements every week or so. Mostly, I've been pleasantly surprised by how few times I've failed or been called out for "trying too hard". My fears were mostly unfounded.
 
-That said, I do miss my defeatist defense every now and then. I recently applied for a job that is, honestly, above my technical level. I wanted to grow, so I applied to the top of where I'd like to be. Surrounded by people who work in the way I'd like to work on a daily basis. Questioning. Creating. Tutoring. Consulting. If the fastest way to grow is surrounding yourself with smart people, I would grow like a weed.
+That said, I do miss my defeatist defense every now and then. I recently applied for a job that is, honestly, above my technical level. I wanted to grow, so I applied to the top of where I'd like to be. Surrounded by people who work in the way I'd like to work on a daily basis. Questioning, creating, tutoring, consulting. If the fastest way to grow is surrounding yourself with smart, experienced people, I would grow like a weed.
 
-Anyway, I applied. My latest interview was in Ruby, my most comfortable language. And I **bombed**. The details aren't really that important, but almost everything went wrong from my approach to my knowledge of libraries to random issues with my PC's setup. It was bad. I'm not expecting a call from them.
+I applied. My latest interview was in Ruby, my most comfortable language. And I **bombed**. The details aren't really that important. Suffice it to say there were problems with almost everything, from my approach, to my knowledge of libraries, to random issues with my PC's setup. It was bad. I'm not expecting a call from them.
 
 Here's the thing: It hurt. It hurt more than I expected, and in a way that wasn't easy to explain away. I had tried my hardest and came up short. 
 
