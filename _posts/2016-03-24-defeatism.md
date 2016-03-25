@@ -14,7 +14,7 @@ My first *real* job was helping to create large back-end services that help with
 
 A common theme in my life is that I will hold back, that I will float something half-hearted with the hope of success but the assumption of failure. It's a defense mechanism of sorts: if it succeeds, then I'm validated. If it fails, well, I wasn't really trying. It's coasting through life without ever putting conviction behind something, without ever putting yourself out there to be hurt. No one will ever point at you and say, "This was your idea, and it was a bad one."
 
-About three years ago, I moved to a new job where I had to define my own development practices. There wasn't really anything set up. There was no "This is our process. No exceptions." to hide behind. I made a conscious effort to stop doing making excuses, to try to do my best. I've definitely lapsed on occasion, but I've stopped letting the phrase "I wasn't really trying" be a shield to hide behind. 
+About three years ago, I moved to a new job where I had to define my own development practices. There wasn't really anything set up. There was no "This is our process. No exceptions." to hide behind. I made a conscious effort to stop making excuses, to try to do my best. I've definitely lapsed on occasion, but I've stopped letting the phrase "I wasn't really trying" be a shield to hide behind. 
 
 All in all, I'd say it's worked. I've grown leaps and bounds over where I was at my first job. I've started to push back on "that's just the way it's always been". I think the team I'm on is doing great work and I see milestone improvements every week or so. Mostly, I've been pleasantly surprised by how few times I've failed or been called out for "trying too hard". My fears were mostly unfounded.
 
