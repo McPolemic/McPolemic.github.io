@@ -4,7 +4,7 @@ date: 2016-03-24
 title: Defeatism
 ---
 
-[Defeatism][defeatism_defn]: The acceptance of defeat without struggle, often with negative connotations.
+> [Defeatism][defeatism_defn]: The acceptance of defeat without struggle, often with negative connotations.
 
 In high school, I would often skip homework assignments. I had excellent test-taking skills and liked to think that it wasn't worth the effort. Honestly, it was hard to simply sit down and do the work. So I wouldn't. I would skate by with middling to poor grades because I didn't want to take the time. That's okay, though, because I wasn't really trying.
 
