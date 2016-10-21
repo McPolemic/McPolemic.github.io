@@ -66,7 +66,7 @@ In `~/.ssh/rc`
 
 Good. Now we'll always have our most recent agent socket symlinked to `~/.ssh/ssh_auth_sock`. Now we want to tell tmux to use that tunnel.
 
-In `~/.tmuxrc`
+In `~/.tmux.conf`
 
     setenv -g SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
 
