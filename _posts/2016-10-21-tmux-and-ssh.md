@@ -59,6 +59,7 @@ Props to Josh Greenwood for not only solving this problem but also fitting the f
 There are legitimate reasons to set the socket via temp files. It allows multiple SSH connections per user to have different ssh-agent settings for one. However, I don't need that. Let's disable that first. SSH allows you to create a file on the remote server with commands to run when you connect.
 
 In `~/.ssh/rc`
+
 ``` 
 #!/bin/bash
 
@@ -71,6 +72,7 @@ fi
 Good. Now we'll always have our most recent agent socket symlinked to `~/.ssh/ssh_auth_sock`. Now we want to tell tmux to use that tunnel.
 
 In `~/.tmuxrc`
+
 ```
 setenv -g SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
 ```
