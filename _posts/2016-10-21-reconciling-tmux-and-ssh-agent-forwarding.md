@@ -1,6 +1,6 @@
 ---
 layout: post
-title: SSH-Agent And tmux
+title: Reconciling Tmux and SSH Agent Forwarding
 date: 2016-10-01
 ---
 
