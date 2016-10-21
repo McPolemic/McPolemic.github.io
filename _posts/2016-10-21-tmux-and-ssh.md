@@ -4,15 +4,14 @@ title: SSH-Agent And tmux
 date: 2016-10-01
 ---
 
-```
-~ $ git pull
-Permission denied (publickey).
-fatal: Could not read from remote repository.
 
-Please make sure you have the correct access rights
-and the repository exists.
-~ $
-```
+    ~ $ git pull
+    Permission denied (publickey).
+    fatal: Could not read from remote repository.
+    
+    Please make sure you have the correct access rights
+    and the repository exists.
+    ~ $
 
 Ugh. It's happened again. I use public keys to authenticate to GitHub. I use tmux for pairing. Somehow, tmux and ssh-agent are fighting over whether they can authenticate me. 
 
@@ -24,13 +23,11 @@ My GitHub key pairs are protected with a password. Typing it in is tedious, so I
 
 SSH forwards an agent by setting up a temporary socket file in your temp directory. It sets a few environment variables, primarily `SSH_AUTH_SOCK`. It sends requests to that socket. This temporary socket is wiped out when you end the SSH session (or the process ends by timing out), and you'll get a new one the next time you SSH back in.
 
-```
-~ $ ssh -A puck.local
-Last login: Wed Oct 19 07:19:46 2016 from 192.168.1.14
-~ $ echo $SSH_AUTH_SOCK
-/tmp/ssh-4ubDInuAFh/agent.30599
-~ $
-```
+    ~ $ ssh -A puck.local
+    Last login: Wed Oct 19 07:19:46 2016 from 192.168.1.14
+    ~ $ echo $SSH_AUTH_SOCK
+    /tmp/ssh-4ubDInuAFh/agent.30599
+    ~ $
 
 ## tmux
 
@@ -60,22 +57,18 @@ There are legitimate reasons to set the socket via temp files. It allows multipl
 
 In `~/.ssh/rc`
 
-``` 
-#!/bin/bash
-
-# Fix SSH auth socket location so agent forwarding works with tmux
-if test "$SSH_AUTH_SOCK" ; then
-  ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
-fi
-```
+    #!/bin/bash
+    
+    # Fix SSH auth socket location so agent forwarding works with tmux
+    if test "$SSH_AUTH_SOCK" ; then
+      ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
+    fi
 
 Good. Now we'll always have our most recent agent socket symlinked to `~/.ssh/ssh_auth_sock`. Now we want to tell tmux to use that tunnel.
 
 In `~/.tmuxrc`
 
-```
-setenv -g SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
-```
+    setenv -g SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
 
 Now, while we may have to set this variable in any pre-existing windows, it will always be up-to-date going forward. As we disconnect and reconnect, our symlink will switch to the most recent `SSH_AUTH_SOCK` temp file.
 
