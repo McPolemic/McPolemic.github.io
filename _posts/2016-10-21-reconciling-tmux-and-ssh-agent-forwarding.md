@@ -69,7 +69,8 @@ Good. Now we'll always have our most recent agent socket symlinked to `~/.ssh/ss
 In `~/.tmux.conf`
 
     # Remove SSH_AUTH_SOCK to disable auto-resetting of Tmux variable
-    set -g update-environment "DISPLAY SSH_ASKPASS SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY"
+    set -g update-environment "DISPLAY SSH_ASKPASS SSH_AGENT_PID \
+                               SSH_CONNECTION WINDOWID XAUTHORITY"
     # Use a symlink to look up SSH authentication
     setenv -g SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
 
