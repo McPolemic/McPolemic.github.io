@@ -64,10 +64,13 @@ In `~/.ssh/rc`
       ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
     fi
 
-Good. Now we'll always have our most recent agent socket symlinked to `~/.ssh/ssh_auth_sock`. Now we want to tell tmux to use that tunnel.
+Good. Now we'll always have our most recent agent socket symlinked to `~/.ssh/ssh_auth_sock`. Now we want to tell tmux to use that tunnel. We'll remove `SSH_AUTH_SOCK` from the list of environment variables that are updated (only for new sessions) every time we connect and set it to our static path instead.
 
 In `~/.tmux.conf`
 
+    # Remove SSH_AUTH_SOCK to disable auto-resetting of Tmux variable
+    set -g update-environment "DISPLAY SSH_ASKPASS SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY"
+    # Use a symlink to look up SSH authentication
     setenv -g SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
 
 Now, while we may have to set this variable in any pre-existing windows, it will always be up-to-date going forward. As we disconnect and reconnect, our symlink will switch to the most recent `SSH_AUTH_SOCK` temp file.
