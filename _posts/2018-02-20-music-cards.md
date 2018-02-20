@@ -18,7 +18,7 @@ What I wanted was something sturdier and cheaper than CDs. I don't really need t
 
 RFID cards were a good candidate than this. They're sturdy, relatively cheap (I bought 50 for $13), and have good support for USB readers. I bought [this RFID reader](https://www.amazon.com/gp/product/B018C8C162/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1) and [these RFID cards](https://www.amazon.com/gp/product/B00GXV4IGC/ref=oh_aui_detailpage_o03_s01?ie=UTF8&psc=1). I hooked them both up to a Raspberry Pi 3 running Raspbian.
 
-![RFID card reader and RFID cards](https://www.dropbox.com/s/edw1sjop1upsm7n/cards%20and%20reader.jpg?dl=1)
+![RFID card reader and RFID cards](https://dl.dropboxusercontent.com/s/edw1sjop1upsm7n/cards%20and%20reader.jpg?raw=1)
 
 Each RFID card has a serial number encoded in it. This is the value the reader will be picking up. The RFID reader acts like a USB keyboard. When you scan one of the cards, it "types" in the eight character serial number printed on the front of the card. We'll map that eight digit code to a song, album, or playlist that Nika wants to play and send that to a specified speaker.
 
@@ -52,8 +52,8 @@ By scanning a card, it finds and plays the specified song pretty quickly.
 
 We printed out pictures and glued them to the various RFID cards. I started out with nine to see how she felt.
 
-![The RFID reader and RFID cards with graphics glued on the front](https://www.dropbox.com/s/bpdbox5iw9ruspv/assembled%20reader.jpg?dl=1)
-![A text message from Liz stating, "Nika is really excited about her 'music cards'. :)"](https://www.dropbox.com/s/cj8cuvnec374gdd/nika_excited.jpg?dl=1)
+![The RFID reader and RFID cards with graphics glued on the front](https://dl.dropboxusercontent.com/s/bpdbox5iw9ruspv/assembled%20reader.jpg?raw=1)
+![A text message from Liz stating, "Nika is really excited about her 'music cards'. :)"](https://dl.dropboxusercontent.com/s/cj8cuvnec374gdd/nika_excited.jpg?raw=1)
 
 ## Challenges
 
