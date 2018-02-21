@@ -87,7 +87,7 @@ We printed out pictures and glued them to the various RFID cards. I started out 
 
 ## Challenges
 
-Often, I feel like posts like this don't delve enough into the challenges someone can run into, making it feel like everything went swimmingly. I ran quite a few challenges, which are worth mentioning for a second. 
+Often, I feel like posts like this don't delve enough into the challenges someone can encounter, making it feel like everything went swimmingly. I ran into quite a few challenges which are worth mentioning.
 
 * I didn't realize RFID cards and readers have different frequencies and bought the wrong reader at first. I returned it and bought the right one.
 * I thought I could always read from STDIN. Only after assembling it did I realize I'd have to read directly from the keyboard.
