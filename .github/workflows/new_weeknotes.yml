@@ -24,7 +24,7 @@ jobs:
         run: |
           git config user.name "Adam Lukens"
           git config user.email "<adam.lukens@mcpolemic.com>"
-          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+          echo "${{ secrets.PAT }}" | gh auth login --with-token
 
       - name: Create and commit the new weeknotes
         run: |
