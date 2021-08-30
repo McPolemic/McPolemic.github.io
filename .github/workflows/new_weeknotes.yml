@@ -24,18 +24,13 @@ jobs:
         run: |
           git config user.name "Adam Lukens"
           git config user.email "<adam.lukens@mcpolemic.com>"
+          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
 
       - name: Create and commit the new weeknotes
         run: |
+          git checkout -b "weeknotes-$(date --iso-8601)"
           ./scripts/next_weeknotes_post.sh      
           git add .
           git commit -m "Add weeknotes post for $(date --iso-8601)"
           git push -u origin HEAD
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          branch: new-weeknotes
-          branch-suffix: timestamp
-          title: Weeknotes
-          assignees: "@McPolemic"
+          gh pr create -f --assignee "@me"
