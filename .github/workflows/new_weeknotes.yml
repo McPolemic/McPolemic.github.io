@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  create-weeknote:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,6 +24,7 @@ jobs:
         run: |
           git config user.name "Adam Lukens"
           git config user.email "<adam.lukens@mcpolemic.com>"
+          gh auth login --with-token ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create and commit the new weeknotes
         run: |
