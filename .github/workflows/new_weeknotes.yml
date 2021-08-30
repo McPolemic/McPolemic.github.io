@@ -19,20 +19,17 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Create a new weeknotes file
-        run: ./scripts/next_weeknotes_post.sh
-      
       # Set up Git for committing
       - name: Set up git config
         run: |
           git config user.name "Adam Lukens"
           git config user.email "<adam.lukens@mcpolemic.com>"
-      
-      # Commit the new weeknotes and open a pull request
-      - name: Commit the new weeknotes
+
+      - name: Create and commit the new weeknotes
         run: |
+          git checkout -b $(date --iso-8601)-weeknotes
+          ./scripts/next_weeknotes_post.sh      
           git add .
           git commit -m "Add weeknotes post for $(date --iso-8601)"
-          git push -u origin $(date --iso-8601)-weeknotes
+          git push -u origin HEAD
           gh pr create -f --assignee @me
