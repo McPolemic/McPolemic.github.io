@@ -38,4 +38,4 @@ jobs:
           branch: new-weeknotes
           branch-suffix: timestamp
           title: Weeknotes
-          assignees: @mcpolemic
+          assignees: "@McPolemic"
