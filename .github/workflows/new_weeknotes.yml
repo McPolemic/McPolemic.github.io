@@ -33,4 +33,4 @@ jobs:
           git add .
           git commit -m "Add weeknotes post for $(date --iso-8601)"
           git push -u origin HEAD
-          gh pr create -f --assignee "@McPolemic"
+          gh pr create -f
