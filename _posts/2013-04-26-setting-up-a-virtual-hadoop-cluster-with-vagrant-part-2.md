@@ -18,13 +18,13 @@ We'll start by setting up a single machine. Let's add a 64-bit Ubuntu install. G
 
 This imports the base box "lucid64" under the name "base-hadoop". We'll use that as the box name from now on. From here, let's set up a directory for our machines to live in.
 
-        adam@light[~]
+        august@light[~]
         $ mkdir hadoop-test
         
-        adam@light[~]
+        august@light[~]
         $ cd hadoop-test
         
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ vagrant init base-hadoop
         A `Vagrantfile` has been placed in this directory. You are now
         ready to `vagrant up` your first virtual environment! Please read
@@ -37,7 +37,7 @@ From here, let's clean up the Vagrantfile. I'm removing most of the comments and
 
 We can check that it's working by running:
 
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ vagrant up
         Bringing machine 'default' up with 'virtualbox' provider...
         [default] Importing base box 'base-hadoop'...
@@ -57,7 +57,7 @@ We can check that it's working by running:
         [default] Mounting shared folders...
         [default] -- /vagrant
         
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ vagrant ssh
         Linux lucid64 2.6.32-38-server #83-Ubuntu SMP Wed Jan 4 11:26:59 UTC 2012 x86_64 GNU/Linux
         Ubuntu 10.04.4 LTS
@@ -83,7 +83,7 @@ Now we're going to work on getting Puppet up and running. First, we'll tell Vagr
 
 Now we'll create our Puppet manifests, which is where the configuration files for Puppet are stored. From your main computer (not the VM), run the following:
 
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ mkdir manifests
 
 In that directory, we'll create a file `base-hadoop.pp`:
@@ -92,7 +92,7 @@ In that directory, we'll create a file `base-hadoop.pp`:
 
 With these basic options set, let's do a quick test to ensure that it still boots and that Puppet is running.
 
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ vagrant reload
         [default] Attempting graceful shutdown of VM...
         [default] Setting the name of the VM...
@@ -115,7 +115,7 @@ With these basic options set, let's do a quick test to ensure that it still boot
         stdin: is not a tty
         notice: Finished catalog run in 0.02 seconds
 
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ 
 
 Great! You can see near the end that Puppet is running with our config file, and finishes running in 0.02 seconds. 
@@ -126,7 +126,7 @@ Next, we'll tell puppet to update apt-get and install Java. We'll add the follow
 
 The exec block names an executable action "apt-get update", and tells Puppet that it can find apt-get in "/usr/bin". The package block states that it should ensure `openjdk-6-jdk` is installed, and that it requires the "apt-get update" action to run first. In this way, we can set up requirements for each stage, and Puppet will figure out what needs to be installed and in what order. Let's do another `vagrant reload` to test our configuration.
 
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ vagrant reload                   
         [default] Attempting graceful shutdown of VM...
         [default] Setting the name of the VM...
@@ -151,7 +151,7 @@ The exec block names an executable action "apt-get update", and tells Puppet tha
         notice: /Stage[main]//Package[openjdk-6-jdk]/ensure: ensure changed 'purged' to 'present'
         notice: Finished catalog run in 33.02 seconds
 
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ vagrant ssh
         Linux lucid64 2.6.32-38-server #83-Ubuntu SMP Wed Jan 4 11:26:59 UTC 2012 x86_64 GNU/Linux
         Ubuntu 10.04.4 LTS
@@ -171,7 +171,7 @@ The exec block names an executable action "apt-get update", and tells Puppet tha
 
 Now that that's installed, we'll install Hadoop. For this, we're going to create a new Puppet module that downloads it from Apache and extracts it to /opt/hadoop. Let's create a modules directory for Hadoop.
 
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ mkdir -p modules/hadoop/manifests
 
 Note that the Puppet configuration for a module goes in a manifests directory, just like our main manifest. Now we'll let Puppet know that we're using the "modules" directory to store all of our modules. Modify `Vagrantfile` to show the following:
@@ -188,7 +188,7 @@ Finally, we'll modify `manifests/base-hadoop.pp` to let Puppet know we want to i
 
 Again, let's reload our Vagrant VM.
 
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ vagrant reload
         [default] Attempting graceful shutdown of VM...
         [default] Setting the name of the VM...
@@ -221,7 +221,7 @@ Alright, pat yourself on the back. We've got a fully installed machine up and ru
 
 Let's get rid of our currently configured single system and build up a network.
 
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ vagrant destroy
         Are you sure you want to destroy the 'default' VM? [y/N] y
         [default] Forcing shutdown of VM...
@@ -240,7 +240,7 @@ We want our network to have five machines: A master, a backup, and three worker 
 
 This sets up the five machines we mentioned, setting IP addresses for each one. By setting `:private_network`, we'll be able to access the VMs and they'll be able to access each other, but no other machine on the network can reach them. Let's start up the cluster.
 
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ vagrant up
         Bringing machine 'master' up with 'virtualbox' provider...
         Bringing machine 'backup' up with 'virtualbox' provider...
@@ -272,7 +272,7 @@ Great! We have all five machines up and running.
 
 We have Hadoop downloaded and extracted, but we still need to set it up to run. For that, we'll need to create some XML files. As these files are configuring Hadoop, we'll create them in `modules/hadoop/` in a new directory named "files".
 
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ mkdir modules/hadoop/files
 
 In this directory, we'll create these five files:
@@ -293,7 +293,7 @@ We'll tell modules/hadoop/manifests/init.pp to copy over the files from the Hado
 
 With everything set up, we'll provision again to copy the files over.
 
-        adam@light[~/hadoop-test/modules/hadoop/files]
+        august@light[~/hadoop-test/modules/hadoop/files]
         $ vagrant provision
         [master] Running provisioner: puppet...
         Running Puppet with base-hadoop.pp...
@@ -315,16 +315,16 @@ With everything set up, we'll provision again to copy the files over.
 
 Let's set up password-less public keys for SSH, so that we won't be prompted for passwords while Hadoop sends work out.
 
-        adam@light[~/hadoop-test/modules/hadoop/files]
+        august@light[~/hadoop-test/modules/hadoop/files]
         $ ssh-keygen -t rsa
         Generating public/private rsa key pair.
-        Enter file in which to save the key (/Users/adam/.ssh/id_rsa): ./id_rsa
+        Enter file in which to save the key (/Users/august/.ssh/id_rsa): ./id_rsa
         Enter passphrase (empty for no passphrase): 
         Enter same passphrase again: 
         Your identification has been saved in ./id_rsa.
         Your public key has been saved in ./id_rsa.pub.
         The key fingerprint is:
-        52:b6:51:04:f1:5e:01:96:f3:7d:05:5c:f6:60:54:c1 adam@light.private
+        52:b6:51:04:f1:5e:01:96:f3:7d:05:5c:f6:60:54:c1 august@light.private
         The key's randomart image is:
         +--[ RSA 2048]----+
         |        o+=o.o*==|
@@ -338,9 +338,9 @@ Let's set up password-less public keys for SSH, so that we won't be prompted for
         |                 |
         +-----------------+
 
-        adam@light[~/hadoop-test/modules/hadoop/files]
+        august@light[~/hadoop-test/modules/hadoop/files]
         $ cat id_rsa.pub 
-        ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEFC7jZNwXhqwdms4AGbyDASGplPPlsMnn6Sidrv4pUY8A5R0DGJCweKMh3cel+W1r3iczZCreV80MXVbvTCeCgrlignC+qaxgZ/RYIe1e9w5wjGEhAW2YRrz4cIntXiD79FdOWCe7O/VsNk4piFPDVG2JQztjP+6nREvGDDB6wa5BHQvr/9kRg16eutrmlNSeaPvTRKF5EFOq1dCqhedV17LxS0gSDgd1v/fOhlm2JNCI5CaaGxS3MPn1eMTA1Mf3W1X9y8w01oRUxiojnXw6zhWXHSDQiJliZkV0wovHkCOd3bdBNiusQara9sdLc5I/kkT8UbEBU7uevNSEH0/R adam@light.private
+        ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEFC7jZNwXhqwdms4AGbyDASGplPPlsMnn6Sidrv4pUY8A5R0DGJCweKMh3cel+W1r3iczZCreV80MXVbvTCeCgrlignC+qaxgZ/RYIe1e9w5wjGEhAW2YRrz4cIntXiD79FdOWCe7O/VsNk4piFPDVG2JQztjP+6nREvGDDB6wa5BHQvr/9kRg16eutrmlNSeaPvTRKF5EFOq1dCqhedV17LxS0gSDgd1v/fOhlm2JNCI5CaaGxS3MPn1eMTA1Mf3W1X9y8w01oRUxiojnXw6zhWXHSDQiJliZkV0wovHkCOd3bdBNiusQara9sdLc5I/kkT8UbEBU7uevNSEH0/R august@light.private
 
 Note that your fingerprint and randomart will be different. Let's add our key to manifests/base-hadoop.pp. Note that we're putting the key from id_rsa.pub in the base-hadoop.pp file.
 
@@ -348,10 +348,10 @@ Note that your fingerprint and randomart will be different. Let's add our key to
 
 We'll copy out the hadoop-env.sh script out of the Hadoop distribution and set the JAVA_HOME variable.
 
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ cd modules/hadoop/files 
 
-        adam@light[~/hadoop-test/modules/hadoop/files]
+        august@light[~/hadoop-test/modules/hadoop/files]
         $ vagrant ssh master -- cat /opt/hadoop-1.0.4/conf/hadoop-env.sh > hadoop-env.sh
 
 Edit it to match the following:
@@ -368,14 +368,14 @@ Lastly, let's give all five machines hostnames so it's easier to address them.
 
 Since we've made some pretty substantial changes, we'll reload the VMs to reapply all settings.
 
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ vagrant reload
 
 # Starting the Cluster
 
 We have the machines. We have the software. Now we just have to start it all up. Let's ssh into the master machine and start up the cluster. 
 
-        adam@light[~/hadoop-test]
+        august@light[~/hadoop-test]
         $ vagrant ssh master
         Linux master 2.6.32-38-server #83-Ubuntu SMP Wed Jan 4 11:26:59 UTC 2012 x86_64 GNU/Linux
         Ubuntu 10.04.4 LTS

@@ -10,10 +10,10 @@ Django is loaded with Python goodness. Whenever I have a particular problem, its
 
 `django-admin.py` is the program name (and is actually just a five-line wrapper), with a subcommand "startproject" and the directory argument "my_project". This results in the following directory structure:
 
-    adam@Light[~]
+    august@Light[~]
     $ django-admin.py startproject my_project
 
-    adam@Light[~]
+    august@Light[~]
     $ ls my_project/*
     my_project/manage.py
 
@@ -40,7 +40,7 @@ The built-in subcommands are stored in `django/core/management/commands`. Here a
 
 The class `Command` is descended from `TemplateCommand`, and it seems that the brunt of the work is being handled by passing it to a method `handle` with the first argument 'project'. Upon further inspection, it uses the string 'project' to pull files from `django/conf/project_template'. Sure enough, we see a very familiar structure.
 
-    adam@Light[~/software/programming/django/django/conf]
+    august@Light[~/software/programming/django/django/conf]
     $ ls project_template/*
     project_template/manage.py
 

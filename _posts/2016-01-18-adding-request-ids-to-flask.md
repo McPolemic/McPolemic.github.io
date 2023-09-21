@@ -155,8 +155,8 @@ Next, we'll set up a small Flask app to show it in action.
 
 Finally, we can send some requests and see that the logging and request IDs are working. 
 
-    adam@puck:~/tmp$ source venv/bin/activate
-    (venv)adam@puck:~/tmp$ python server.py 
+    august@puck:~/tmp$ source venv/bin/activate
+    (venv)august@puck:~/tmp$ python server.py 
     2016-01-18 02:40:19,258 - werkzeug._internal._log:87 - INFO -  -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
     2016-01-18 02:40:42,543 - __main__.server.hello:11 - INFO - 266e188c-f8d8-48bd-a285-eabc4f0a598f - Sending our hello
     2016-01-18 02:40:42,543 - werkzeug._internal._log:87 - INFO -  - 127.0.0.1 - - [18/Jan/2016 02:40:42] "GET / HTTP/1.1" 200 -

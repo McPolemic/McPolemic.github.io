@@ -24,21 +24,21 @@ In order to make this a bit safer to change, my first step is to add tests. Thes
 
 I can see two files being opened, `bsr.csv` and `bsr.txt`. They're both being split by newlines, so I need to include files with multiple lines. I also see that we're creating new files by appending in the current directory. It doesn't look like anything else is modified in the folder. With all that said, I'm going to create a new folder, throw in some dummy data, and see if we can get a preliminary result.
 
-    adam@Light[~/temp]
+    august@Light[~/temp]
     $ mkdir bsr_refactor
 
-    adam@Light[~/temp]
+    august@Light[~/temp]
     $ mv bsr.py bsr_refactor 
 
-    adam@Light[~/temp]
+    august@Light[~/temp]
     $ cd bsr_refactor 
 
-    adam@Light[~/temp/bsr_refactor]
+    august@Light[~/temp/bsr_refactor]
     $ cat > bsr.txt
     I am not quite sure 
     how this will affect anything.
 
-    adam@Light[~/temp/bsr_refactor]
+    august@Light[~/temp/bsr_refactor]
     $ cat > bsr.csv
     this,seems,to,need,multiple,lines
     I,don't,know,if,this,works
@@ -46,31 +46,31 @@ I can see two files being opened, `bsr.csv` and `bsr.txt`. They're both being sp
 
 With that, we try the script.
 
-    adam@Light[~/temp/bsr_refactor]
+    august@Light[~/temp/bsr_refactor]
     $ python bsr.py
     done
 
-    adam@Light[~/temp/bsr_refactor]
+    august@Light[~/temp/bsr_refactor]
     $ ls
     bsr.csv     bsr.py      bsr.txt     output1.txt output2.txt
 
-    adam@Light[~/temp/bsr_refactor]
+    august@Light[~/temp/bsr_refactor]
     $ cat bsr.txt
     I am not quite sure 
     how this will affect anything.
 
-    adam@Light[~/temp/bsr_refactor]
+    august@Light[~/temp/bsr_refactor]
     $ cat bsr.csv
     this,seems,to,need,multiple,lines
     I,don't,know,if,this,works
     this,seems,like,a,fair,test
 
-    adam@Light[~/temp/bsr_refactor]
+    august@Light[~/temp/bsr_refactor]
     $ cat output1.txt
     I am not quite sure 
     how I will affect anything.
 
-    adam@Light[~/temp/bsr_refactor]
+    august@Light[~/temp/bsr_refactor]
     $ cat output2.txt
     I am not quite sure 
     how this will affect anything.
@@ -89,13 +89,13 @@ It appears that it is replacing all instances of a field in the first line of th
 
 I'll create two new tests to capitalize on what we now know:
 
-    adam@Light[~/temp/bsr_refactor]
+    august@Light[~/temp/bsr_refactor]
     $ cat > bsr.csv
     <hostname>,var1,var2,other
     server1,hello,good bye,another
     ,hi,adios,last change
 
-    adam@Light[~/temp/bsr_refactor]
+    august@Light[~/temp/bsr_refactor]
     $ cat > bsr.txt
     var1,     
 
@@ -106,11 +106,11 @@ I'll create two new tests to capitalize on what we now know:
     $ python bsr.py 
     done
 
-    adam@Light[~/temp/bsr_refactor]
+    august@Light[~/temp/bsr_refactor]
     $ ls
     mbsr.csv         bsr.py          bsr.txt         output2.txt     server1.txt
 
-    adam@Light[~/temp/bsr_refactor]
+    august@Light[~/temp/bsr_refactor]
     $ cat server1.txt 
     hello,
 
@@ -118,7 +118,7 @@ I'll create two new tests to capitalize on what we now know:
 
     good bye.
 
-    adam@Light[~/temp/bsr_refactor]
+    august@Light[~/temp/bsr_refactor]
     $ cat output2.txt 
     hi,
 

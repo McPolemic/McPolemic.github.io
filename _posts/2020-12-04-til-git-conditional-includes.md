@@ -15,8 +15,8 @@ and `~/src/project_dir/.gitconfig_include` sets my work email, allowing my consu
 
 ```
 [user]
-  name = Adam Lukens
-  email = adam.lukens@company.com
+  name = August Lukens
+  email = august@company.com
 ```
 
 More info here: https://git-scm.com/docs/git-config#_conditional_includes

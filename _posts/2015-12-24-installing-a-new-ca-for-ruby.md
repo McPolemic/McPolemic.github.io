@@ -14,7 +14,7 @@ This morning, tragedy struck:
 => #<Faraday::Client:0x3ff0b1da47c4>
 [3] pry(main)> client.issues
 Faraday::SSLError: SSL_connect returned=1 errno=0 state=error: certificate verify failed
-from /Users/adam/.rbenv/versions/2.2.3/lib/ruby/2.2.0/net/http.rb:923:in `connect'
+from /Users/august/.rbenv/versions/2.2.3/lib/ruby/2.2.0/net/http.rb:923:in `connect'
 [4] pry(main)
 </pre>
 
