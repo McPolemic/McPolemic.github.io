@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+require 'date'
+
+# Get the last post
+last_post = Dir["_posts/*weeknotes*"].sort.last
+last_number = last_post.split('-').last.gsub('.md', '').to_i
+
+new_number = last_number + 1
+
+# Get the current date and subtract days until it's a Sunday
+current_date = Date.today
+days_to_previous_sunday = (current_date.wday) % 7
+new_date = (current_date - days_to_previous_sunday).strftime('%Y-%m-%d')
+
+new_post = "_posts/#{new_date}-weeknotes-#{new_number}.md"
+
+File.open(new_post, 'w') do |file|
+  file.puts <<-EOF
+---
+layout: post
+title: Weeknotes #{new_number} - <TITLE>
+date: #{new_date}
+---
+* <Point 1>
+* <Point 2>
+* <Point 3>
+EOF
+end
+
+puts "Created new weeknotes post: #{new_post}"
