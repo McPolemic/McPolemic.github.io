@@ -4,5 +4,5 @@ title: About
 permalink: /about/
 ---
 
-Twitter: [@McPolemic](https://twitter.com/mcpolemic)
-GitHub: [@McPolemic](https://github.com/mcpolemic)
+* Mastodon: [@McPolemic](https://mastodon.cloud/@McPolemic)
+* GitHub: [@McPolemic](https://github.com/mcpolemic)
