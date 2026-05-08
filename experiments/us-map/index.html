@@ -1,0 +1,265 @@
+<meta charset="utf-8" />
+<div id="quiz">
+  <div id="status">
+    <span id="score">Correct: 0 | Incorrect: 0 | Remaining: 50</span>
+  </div>
+
+  <p id="prompt">Click a state, then type its name.</p>
+
+  <input
+    id="answer"
+    type="text"
+    placeholder="State name"
+    autocomplete="off"
+    disabled
+  />
+
+  <button id="check">Check</button>
+  <button id="next">Next</button>
+  <button id="reset">Reset</button>
+
+  <div id="map-container"></div>
+</div>
+
+<script>
+  const states = {
+    AL: "Alabama",
+    AK: "Alaska",
+    AZ: "Arizona",
+    AR: "Arkansas",
+    CA: "California",
+    CO: "Colorado",
+    CT: "Connecticut",
+    DE: "Delaware",
+    FL: "Florida",
+    GA: "Georgia",
+    HI: "Hawaii",
+    ID: "Idaho",
+    IL: "Illinois",
+    IN: "Indiana",
+    IA: "Iowa",
+    KS: "Kansas",
+    KY: "Kentucky",
+    LA: "Louisiana",
+    ME: "Maine",
+    MD: "Maryland",
+    MA: "Massachusetts",
+    MI: "Michigan",
+    MN: "Minnesota",
+    MS: "Mississippi",
+    MO: "Missouri",
+    MT: "Montana",
+    NE: "Nebraska",
+    NV: "Nevada",
+    NH: "New Hampshire",
+    NJ: "New Jersey",
+    NM: "New Mexico",
+    NY: "New York",
+    NC: "North Carolina",
+    ND: "North Dakota",
+    OH: "Ohio",
+    OK: "Oklahoma",
+    OR: "Oregon",
+    PA: "Pennsylvania",
+    RI: "Rhode Island",
+    SC: "South Carolina",
+    SD: "South Dakota",
+    TN: "Tennessee",
+    TX: "Texas",
+    UT: "Utah",
+    VT: "Vermont",
+    VA: "Virginia",
+    WA: "Washington",
+    WV: "West Virginia",
+    WI: "Wisconsin",
+    WY: "Wyoming"
+  };
+
+  const totalStates = Object.keys(states).length;
+
+  let selectedState = null;
+  const answered = new Set();
+  let correctCount = 0;
+  let incorrectCount = 0;
+
+  const answerInput = document.querySelector("#answer");
+  const prompt = document.querySelector("#prompt");
+  const scoreEl = document.querySelector("#score");
+  const mapContainer = document.querySelector("#map-container");
+
+  function updateScore() {
+    const remaining = totalStates - answered.size;
+    scoreEl.textContent =
+      `Correct: ${correctCount} | Incorrect: ${incorrectCount} | Remaining: ${remaining}`;
+  }
+
+  function statePaths() {
+    return mapContainer.querySelectorAll("svg path[id]");
+  }
+
+  function quizPaths() {
+    return Array.from(statePaths()).filter(p => states[p.id]);
+  }
+
+  function selectState(id) {
+    if (answered.has(id)) return;
+
+    selectedState = id;
+
+    quizPaths().forEach(p => p.classList.remove("selected"));
+    const path = document.getElementById(id);
+    if (path) path.classList.add("selected");
+
+    answerInput.disabled = false;
+    answerInput.value = "";
+    answerInput.focus();
+  }
+
+  function pickNext() {
+    const remaining = quizPaths().filter(p => !answered.has(p.id));
+    if (remaining.length === 0) {
+      prompt.textContent = "All done!";
+      answerInput.disabled = true;
+      selectedState = null;
+      return;
+    }
+    const choice = remaining[Math.floor(Math.random() * remaining.length)];
+    selectState(choice.id);
+  }
+
+  function normalize(value) {
+    return value.trim().toLowerCase().replace(/\s+/g, " ");
+  }
+
+  function checkAnswer() {
+    if (!selectedState) return;
+    if (answered.has(selectedState)) return;
+
+    const expected = states[selectedState];
+    const actual = answerInput.value;
+    const selectedPath = document.getElementById(selectedState);
+
+    if (normalize(actual) === normalize(expected)) {
+      prompt.textContent = "Correct!";
+      selectedPath.classList.add("correct");
+      correctCount++;
+    } else {
+      prompt.textContent = `Not quite. That was ${expected}.`;
+      selectedPath.classList.add("incorrect");
+      incorrectCount++;
+    }
+
+    selectedPath.classList.remove("selected");
+    selectedPath.classList.add("answered");
+    answered.add(selectedState);
+    selectedState = null;
+    answerInput.value = "";
+    answerInput.disabled = true;
+    updateScore();
+  }
+
+  function reset() {
+    answered.clear();
+    correctCount = 0;
+    incorrectCount = 0;
+    selectedState = null;
+    quizPaths().forEach(p => {
+      p.classList.remove("selected", "correct", "incorrect", "answered");
+    });
+    answerInput.value = "";
+    answerInput.disabled = true;
+    prompt.textContent = "Click a state, then type its name.";
+    updateScore();
+  }
+
+  function wirePaths() {
+    quizPaths().forEach(path => {
+      path.addEventListener("click", () => selectState(path.id));
+    });
+  }
+
+  fetch("us.svg")
+    .then(r => r.text())
+    .then(svgText => {
+      mapContainer.innerHTML = svgText;
+      const svg = mapContainer.querySelector("svg");
+      if (svg) svg.id = "map";
+      // Strip inline style/fill attributes so our CSS classes can take effect.
+      mapContainer.querySelectorAll("svg path").forEach(p => {
+        p.removeAttribute("style");
+        p.removeAttribute("fill");
+      });
+      wirePaths();
+      updateScore();
+    });
+
+  document.querySelector("#check").addEventListener("click", checkAnswer);
+  document.querySelector("#next").addEventListener("click", pickNext);
+  document.querySelector("#reset").addEventListener("click", reset);
+
+  answerInput.addEventListener("keydown", event => {
+    if (event.key === "Enter") checkAnswer();
+  });
+</script>
+
+<style>
+  #quiz {
+    font-family: system-ui, sans-serif;
+    max-width: 900px;
+    margin: 1rem auto;
+    padding: 0 1rem;
+  }
+
+  #status {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  #map {
+    max-width: 800px;
+    width: 100%;
+    height: auto;
+  }
+
+  #map path {
+    fill: #b0bec5;
+    stroke: #fff;
+    stroke-width: 1;
+    cursor: pointer;
+    transition: fill 0.15s ease;
+  }
+
+  #map path:hover {
+    fill: #78909c;
+  }
+
+  #map path.answered {
+    cursor: default;
+  }
+
+  #map path.selected,
+  #map path.selected:hover {
+    fill: #2196f3;
+  }
+
+  #map path.correct,
+  #map path.correct:hover {
+    fill: #2e7d32;
+  }
+
+  #map path.incorrect,
+  #map path.incorrect:hover {
+    fill: #c62828;
+  }
+
+  input {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    margin-left: 0.25rem;
+  }
+</style>
